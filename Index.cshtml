@@ -1,0 +1,42 @@
+﻿@model List<DangVanTai.Models.NhanVien>
+
+<div class="container">
+    <h1>Tạo web hiện thị dẫn sách nhân viên (có thông tin phòng ban đi kèm)</h1>
+    <p>Bấm nút Detrail để sử dụng trang chi tiết của nhân viên đó.</p>
+    <p>Data lấy từ DB hướng dẫn.</p>
+
+    @if (Model.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Mã Nhân Viên</th>
+                    <th>Họ Tên</th>
+                    <th>Ngày Sinh</th>
+                    <th>Địa Chỉ</th>
+                    <th>Phòng Ban</th>
+                    <th>Chi Tiết</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var nhanVien in Model)
+                {
+                    <tr>
+                        <td>@nhanVien.MaNhanVien</td>
+                        <td>@nhanVien.HoTen</td>
+                        <td>@nhanVien.NgaySinh.ToString("dd/MM/yyyy")</td>
+                        <td>@nhanVien.DiaChi</td>
+                        <td>@nhanVien.PhongBan.TenPhongBan</td>
+                        <td>
+                            <a asp-action="Detail" asp-route-id="@nhanVien.MaNhanVien" class="btn btn-primary">Detail</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Không có dữ liệu nhân viên.</p>
+    }
+</div>
